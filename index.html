@@ -56,17 +56,17 @@
                   
                         setTimeout(function () {
                             if(obj.moveLeft){
-                            switch (value.charAt(i)) {
-                                case "V":
-                                case "L": obj.moveLeft(); break;
+                                switch (value.charAt(i)) {
+                                    case "V":
+                                    case "L": obj.moveLeft(); break;
 
-                                case "H":
-                                case "R": obj.moveRight(); break;
+                                    case "H":
+                                    case "R": obj.moveRight(); break;
 
-                                case "G":
-                                case "F": obj.moveUp(); break;
+                                    case "G":
+                                    case "F": obj.moveUp(); break;
 
-                            }
+                                }
                             }
                             exec(i, this);
                         }, (i+1)*2000)
