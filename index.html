@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+
+<html>
+    <head>
+        <title>Jayway Robot</title>
+    </head>
+    <style>
+    #container{
+        border: 2px solid blueviolet;
+    }
+    </style>
+    <script>
+    window.onload = function (){
+        var canvas = document.getElementById("container");
+        var txt = document.getElementById('moveOrders');
+
+        canvas.addEventListener('keydown',move,true);
+
+        txt.addEventListener('keydown',move,true);
+        ctx = canvas.getContext("2d");
+
+        ctx.fillRect(400,400,100,100);
+        
+        // var x = 400;
+        // var y = 400;
+        var Robot=function(x,y){
+            this.x=x;
+            this.y=y;
+        }
+        Robot.prototype.moveUp=function(){
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            this.y=this.y-100;
+            ctx.fillRect(this.x,this.y,100,100);
+        }
+
+        Robot.prototype.moveDown=function(){
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            this.y=this.y+100;
+            ctx.fillRect(this.x,this.y,100,100);
+        }
+        Robot.prototype.moveLeft=function(){
+            ctx.clearRect(0,0,canvas.width,canvas.height);    
+            this.x=this.x-100;
+            ctx.fillRect(this.x,this.y,100,100);
+        }
+        Robot.prototype.moveRight=function(){
+            ctx.clearRect(0,0,canvas.width,canvas.height);
+            this.x=this.x+100;
+            ctx.fillRect(this.x,this.y,100,100);
+        }
+       Robot.prototype.move=function(value){
+            for (i=0;i<value.length;i++){
+                switch(value.charAt(i)){
+                    case "V":
+                    case "L": this.moveLeft(); break;
+
+                    case "H":
+                    case "R": this.moveRight(); break;
+
+                    case "G":
+                    case "F": this.moveUp(); break;
+                    
+                }
+             }
+
+       }
+        var robot= new Robot(400,400);
+
+        function move(e){
+            //up
+            if (e.keyCode==38){
+              robot.moveUp();
+
+            }
+            //down
+            if (e.keyCode==40){
+               robot.moveDown();
+            }
+            //left
+            if (e.keyCode==37){
+                robot.moveLeft();            }
+            //right
+            if (e.keyCode==39){
+                robot.moveRight();
+            }
+            //enter from input
+            if (e.keyCode==13){
+                robot.move(e.target.value.toUpperCase());
+                e.target.value='';
+            }
+        }
+    }
+    </script>
+
+    <body>
+        <canvas width="500" height="500" id="container" tabindex="1">
+        </canvas>
+        <br>
+        <input type="text" id="startPosition" placeholder="Start Position">
+        <br>
+        <input type="text" id="moveOrders" placeholder="Move Ordres">
+    </body>
+</html>
